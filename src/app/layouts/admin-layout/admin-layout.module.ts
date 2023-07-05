@@ -16,10 +16,12 @@ import { UpgradeComponent }         from '../../pages/upgrade/upgrade.component'
 import { PacientesComponent }       from 'app/pages/componentes/pacientes/pacientes.component';
 import { ServiciosComponent }       from 'app/pages/componentes/servicios/servicios.component';
 import { CitasComponent } from 'app/pages/componentes/citas/citas.component';
+import { CitasDetaComponent } from 'app/pages/componentes/citasdeta/citasdeta.component';
 import { EstadosComponent } from 'app/pages/componentes/estados/estados.component';
 import { FormularioServiciosComponent } from 'app/pages/componentes/servicios/formulario-servicios/formulario-servicios.component';
 import { FormularioPacientesComponent } from  'app/pages/componentes/pacientes/formulario-pacientes/formulario-pacientes.component';
 import { FormularioCitasComponent}      from 'app/pages/componentes/citas/formulario-citas/formulario-citas.component';
+import { FormularioCitasDetaComponent}      from 'app/pages/componentes/citasdeta/formulario-citasdeta/formulario-citasdeta.component';
 import { FormularioEstadosComponent } from 'app/pages/componentes/estados/formulario-estados/formulario-estados.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -48,11 +50,13 @@ import { LoginComponent } from 'app/pages/componentes/usuarios/login.component';
     PacientesComponent,
     ServiciosComponent,
     CitasComponent,
+    CitasDetaComponent,
     EstadosComponent,
     LoginComponent,
     FormularioServiciosComponent,
     FormularioPacientesComponent,
     FormularioCitasComponent,
+    FormularioCitasDetaComponent,
    FormularioEstadosComponent
     
     ]

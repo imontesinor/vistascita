@@ -18,14 +18,15 @@ export const ROUTES: RouteInfo[] = [
     { path: '/dashboard',     title: 'Dashboard',         icon:'nc-bank',       class: '' },
     { path: '/pacientes',     title: 'Pacientes',         icon:'nc-single-02',  class: '' },
     { path: '/servicios',     title: 'Servicios',         icon:'nc-globe',  class: '' },
-    { path: '/citas',         title: 'Citas',             icon:'nc-paper',      class: '' },
+    { path: '/citas',         title: 'PacientexCitas',             icon:'nc-paper',      class: '' },
+    { path: '/citasdeta',         title: 'Citas Detalle',             icon:'nc-paper',      class: '' },
     { path: '/estados',       title: 'Estados',           icon:'nc-diamond',    class: '' },
     { path: '/login',         title: 'Usuarios',          icon:'nc-single-02',  class: '' },
-    { path: '/maps',          title: 'Maps',              icon:'nc-pin-3',      class: '' },
-    { path: '/notifications', title: 'Notifications',     icon:'nc-bell-55',    class: '' },
-    { path: '/table',         title: 'Table List',        icon:'nc-tile-56',    class: '' },
-    { path: '/typography',    title: 'Typography',        icon:'nc-caps-small', class: '' },
-    { path: '/upgrade',       title: 'Upgrade to PRO',    icon:'nc-spaceship',  class: 'active-pro' },
+   // { path: '/maps',          title: 'Maps',              icon:'nc-pin-3',      class: '' },
+   // { path: '/notifications', title: 'Notifications',     icon:'nc-bell-55',    class: '' },
+  //  { path: '/table',         title: 'Table List',        icon:'nc-tile-56',    class: '' },
+   // { path: '/typography',    title: 'Typography',        icon:'nc-caps-small', class: '' },
+    //{ path: '/upgrade',       title: 'Upgrade to PRO',    icon:'nc-spaceship',  class: 'active-pro' },
     
 ];
 

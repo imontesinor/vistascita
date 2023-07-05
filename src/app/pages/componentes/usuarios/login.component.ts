@@ -39,7 +39,7 @@ titulo:String='Por favor Sign In';
         this.serviceService.guardarToken(dato.access_token);
         let usuario= this.serviceService.usuario;
         console.log('usuariregistradon',usuario);
-        this.router.navigate(['/servicios']);
+        this.router.navigate(['/pacientes']);
         Swal.fire('Mensaje', `hola ${usuario.username} iniciaste tu sesion con exito`,'success')
     },e =>{
         if(e.status== 400){

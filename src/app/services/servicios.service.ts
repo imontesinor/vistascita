@@ -60,7 +60,7 @@ usuarios:Usuarios;
   }
   private isNoAutorizado(e):boolean{
     if(e.status==401){
-      Swal.fire('Hola','Por favor verifique que sea un usuario logueado','warning');
+     // Swal.fire('Hola','Por favor verifique que sea un usuario logueado','warning');
       if(this.isAuthenticated()){
          this.logout();
       }

@@ -7,10 +7,15 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
+            <td > <input type="text" [(ngModel)]="query" placeholder="Search........"></td>
+
+            <td> <button  (click)="filtrarPacientes()" class="btn btn-primary btn-round"> FILTRAR</button></td>
+            <td></td>
+            <td></td>
             <table class="table">
               <thead class=" text-primary">
-
-                <th>
+              
+                <th> 
                   Cedula
                 </th>
                 <th>

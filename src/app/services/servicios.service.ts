@@ -186,6 +186,17 @@ usuarios:Usuarios;
     );
   }
 
+  filtrarPaci(id:any){
+
+    return this.http.get<Pacientes[]>(this.URL_BACKEND+`api/pacientes/buscarpac?id=${id}&pagina=0&size=8`,{headers:this.agregarAthorizationHeaders()}).pipe(
+      catchError(e=>{
+        this.isNoAutorizado(e);
+        return throwError(e);
+      })
+    );
+
+  }
+
   guardarServicios(servicios:Servicios) : Observable<Object>{
     return this.http.post(this.URL_BACKEND+'api/servicios/create',servicios,{headers:this.agregarAthorizationHeaders()}).pipe(
       catchError(e =>{

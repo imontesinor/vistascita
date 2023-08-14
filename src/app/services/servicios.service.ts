@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import * as e from 'express';
 import { Usuarios } from '../model/usuarios';
 import { constants } from 'buffer';
+import { Cirugias } from 'app/model/cirugias';
+import { url } from 'inspector';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,6 +27,8 @@ eid:number;
 nombre:String;
 estados:Estados;
 usuarios:Usuarios;
+cirugias:Cirugias[];
+cirugia:Cirugias;
 
   constructor(public http: HttpClient, public route:Router) { }
  
@@ -177,6 +181,16 @@ usuarios:Usuarios;
     );
 
   }
+
+  listarCirugia(pagina:number,size:number){
+    return this.http.get<Cirugias[]>(this.URL_BACKEND+`api/cirugia/consultar/${(pagina?pagina:1)-1},${size}`,{headers:this.agregarAthorizationHeaders()}).pipe(
+      catchError(e=>{
+        this.isNoAutorizado(e);
+        return throwError(e);
+      })
+    );
+  
+  }
   filtrarId(id:any){
     return this.http.get<Citas[]>(this.URL_BACKEND+`api/citas/listarid?id=${id}&pagina=0&size=8`,{headers:this.agregarAthorizationHeaders()}).pipe(
       catchError(e=>{
@@ -194,12 +208,23 @@ usuarios:Usuarios;
         return throwError(e);
       })
     );
-
   }
 
   guardarServicios(servicios:Servicios) : Observable<Object>{
     return this.http.post(this.URL_BACKEND+'api/servicios/create',servicios,{headers:this.agregarAthorizationHeaders()}).pipe(
       catchError(e =>{
+        if(this.isNoAutorizado(e)){
+          return throwError(e);
+        }
+        console.error(e.error.mensaje);
+        Swal.fire('error',e.error.mensaje,'error');
+        return throwError(e);
+      })
+    );
+  }
+  guardarCirugia(cirugia:Cirugias): Observable<Object>{
+    return this.http.post(this.URL_BACKEND+'api/cirugia/guardar',cirugia,{headers:this.agregarAthorizationHeaders()}).pipe(
+      catchError(e=>{
         if(this.isNoAutorizado(e)){
           return throwError(e);
         }
@@ -230,6 +255,7 @@ usuarios:Usuarios;
         )
         }
     
+     
     
  
   listserviciosp(){
@@ -241,6 +267,7 @@ return this.http.get<Servicios[]>(this.URL_BACKEND+'api/servicios/consultasp',{h
 )
 
   }
+
   guardarPacientes(pacientes:Pacientes){
     return this.http.post(this.URL_BACKEND+'api/pacientes/guardar',pacientes,{headers: this.agregarAthorizationHeaders()}).pipe(
       catchError(e=>{
@@ -290,5 +317,8 @@ return this.http.get<Servicios[]>(this.URL_BACKEND+'api/servicios/consultasp',{h
   }
 
 
+  
 
 }
+
+

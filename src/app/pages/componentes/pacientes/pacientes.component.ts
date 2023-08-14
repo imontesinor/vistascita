@@ -3,6 +3,7 @@ import { Component,OnInit,Output,EventEmitter,Input } from '@angular/core';
 import { Pacientes } from 'app/model/pacientes';
 import { ActivatedRoute,Router } from '@angular/router';
 import { ServiciosService } from 'app/services/servicios.service';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-pacientes',
@@ -23,22 +24,34 @@ export class PacientesComponent{
 
 
     constructor(
-      public serviciosservice: ServiciosService, public route:ActivatedRoute, private router:Router ) {}
+      public serviciosservice: ServiciosService, public route:ActivatedRoute, public router:Router ) {}
 
     ngOnInit(): void {
       this.listarPacientes();
     }
 
     filtrarPacientes(){
-
+      if(this.pacientes==null){
+        Swal.fire('mensaje','No se encuentra datos','info')
+       }  
       this.serviciosservice.filtrarPaci(this.query).subscribe((dato:any) => {
+       
         console.log('filtroPaciente',dato);
+           
         setTimeout(()=>{
-          this.pacientes=dato.content
-          this.total=dato.totalElements
+        
+          this.pacientes= dato.content
+          this.total=dato.totalElements;
+        
         })
-      })    
+      }) 
+    
     }
+
+
+   filPaciente():any{
+   return this.pacientes.filter(pa => pa.nombre.toLowerCase().includes(this.query.toLowerCase()));
+   }
 
     listarPacientes() {
       this.serviciosservice
@@ -53,7 +66,8 @@ export class PacientesComponent{
 
 }
 
-buscarIdPaciente(pa:Pacientes){
+
+buscarId(pa:Pacientes){
 console.log(this.pacien=pa);
 }
 
@@ -63,6 +77,12 @@ citaPaciente(id:number){
    this.router.navigate([`/citas/${id}`], { relativeTo: this.route });
   
 }
+
+irCirugia(id:number){
+  console.log('id cx',id);
+  this.router.navigate([`/cirugias/${id}`],{relativeTo:this.route});
+
+  }
 
 /* realiza el filtro falta desde listar
 capturarString(filtro){

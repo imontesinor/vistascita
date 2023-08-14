@@ -6,15 +6,17 @@
           <!--<input #inputstring (keyup)="capturarString(inputstring.value)" type="text" class="form-control" placeholder="Entidad"/>-->
         </div>
         <div class="card-body">
-          <div class="table-responsive">
-            <td > <input type="text" [(ngModel)]="query" placeholder="Search........"></td>
+        <div class="table-responsive">
+          <td > <input type="text" [(ngModel)]="query" placeholder="Search........"></td>
 
-            <td> <button  (click)="filtrarPacientes()" class="btn btn-primary btn-round"> FILTRAR</button></td>
-            <td></td>
-            <td></td>
+     <td> <button  (click)="filtrarPacientes()" class="btn btn-primary btn-round"> FILTRAR</button></td>
+     
+          <td></td>
+          <td></td>
             <table class="table">
+          
               <thead class=" text-primary">
-              
+               
                 <th> 
                   Cedula
                 </th>
@@ -28,19 +30,26 @@
                 </th>
               </thead>
               <tbody>
-                <tr  *ngFor="let pa of pacientes | paginate: {itemsPerPage: tamano,currentPage:p,totalItems:total}">
+                
+                <tr  *ngFor=" let pa of pacientes | paginate: {itemsPerPage: tamano,currentPage:p,totalItems:total} ">
+                  
+                
 
                   <td >{{pa.cedula}}</td>
+                  <td >{{pa.nombre}}</td>
                   <td >{{pa.nombre}} {{pa.apellidos}}</td>
                   <td >{{pa.entidad}}</td>
 
-
-                    <td><button (click)="buscarIdPaciente(pa)"  class="btn btn-primary btn-round">Detalle</button>
+                
+                    <td><button (click)="buscarId(pa)"  class="btn btn-primary btn-round">Detalle</button>
                    </td>
                  <td> <div class="update ml-auto mr-auto">
         <button type="submit" class="btn btn-primary btn-round" (click)="citaPaciente(pa.id)">cita</button>
+       
       </div> 
-
+      <td>
+        <div div class="update ml-auto mr-auto">
+          <button type="submit" class="btn btn-primary btn-round" (click)="irCirugia(pa.id)">Cirugia</button></div>
 
                 <td class="text-right">
               </tbody>

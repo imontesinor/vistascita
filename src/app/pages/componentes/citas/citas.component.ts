@@ -34,12 +34,12 @@ export class CitasComponent{
     total:number=0;
     tamano:number=8;
     servi:Servicios;
-     @Input() idservicio:Servicios;   
-     @Input() idrecibo:Pacientes;
+   /*  @Input() idservicio:Servicios;   
+     @Input() idrecibo:Pacientes;*/
    
     
 
-        constructor(private route: ActivatedRoute,public servicioservice:ServiciosService,private router:Router, public serviciosservice: ServiciosService)
+        constructor(private route: ActivatedRoute,public servicioservice:ServiciosService,private router:Router)
         { }
 
   
@@ -73,7 +73,7 @@ export class CitasComponent{
   
     listarCitas(){
     
-        this.serviciosservice.listarCitas(this.p,this.tamano).subscribe(
+        this.servicioservice.listarCitas(this.p,this.tamano).subscribe(
             (dato:any)=>{
                 console.log(dato);
                 setTimeout(()=>{

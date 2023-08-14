@@ -25,9 +25,7 @@ export class FormularioCitasComponent{
     cita:Citas= new Citas;
     paciente:Pacientes;
     dateControl:'';
-   //s:Servicios;
-    @Input() pacienr:Pacientes;
-    @Input() servicir:Servicios;
+   
     @Input() citarecibo:Citas;
     
 
@@ -107,7 +105,7 @@ export class FormularioCitasComponent{
       this.guardarCitas(this.formCitas);        
     }
     comparaServicio(s1:Servicios,s2:Servicios){
-     return  s1== null || s2==null || s1==undefined || s2== undefined ?false : s1.eid === s2.eid ;
+     return  s1==undefined || s2== undefined ?false : s1.eid === s2.eid ;
     }
 
    ngOnInit(): void {
@@ -120,7 +118,7 @@ export class FormularioCitasComponent{
 
    
    seleccionEstado(e1:Estados,e2:Estados){
-   return  e1==null || e2==null || e1== undefined || e2== undefined  ?false: e1.id===e2.id
+   return  e1== undefined || e2== undefined  ?false: e1.id===e2.id
 
    }
 

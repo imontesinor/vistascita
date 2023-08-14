@@ -12,11 +12,13 @@ import { PacientesComponent } from 'app/pages/componentes/pacientes/pacientes.co
 import { Servicios } from 'app/model/servicios';
 import { ServiciosComponent } from 'app/pages/componentes/servicios/servicios.component';
 import { CitasComponent } from 'app/pages/componentes/citas/citas.component';
+import { CirugiasComponent } from 'app/pages/componentes/cirugias/cirugias.component';
 import { CitasDetaComponent } from 'app/pages/componentes/citasdeta/citasdeta.component';
 import { EstadosComponent } from 'app/pages/componentes/estados/estados.component';
 import { LoginComponent } from 'app/pages/componentes/usuarios/login.component';
 import { AuthGuard } from 'app/guards/auth.guard';
 import { RoleGuard } from 'app/guards/role.guard';
+
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -28,6 +30,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'citas/:id',      component: CitasComponent },
+    { path: 'cirugias/:id',   component: CirugiasComponent },
     { path: 'citasdeta',      component: CitasDetaComponent },
     { path: 'pacientes',      component: PacientesComponent },
     { path: 'servicios',      component: ServiciosComponent, canActivate:[AuthGuard,RoleGuard], data:{role:'ROLE_ADMIN'}},

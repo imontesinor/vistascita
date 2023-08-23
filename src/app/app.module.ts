@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from "ngx-pagination";
-import { FiltercitasPipe } from './pipe/filtercitas.pipe';
+import { FiltercitasPipe } from './pages/pipe/pipe/filtercitas.pipe';
 
 
 
@@ -53,7 +53,7 @@ import { FiltercitasPipe } from './pipe/filtercitas.pipe';
   exports:[
     ReactiveFormsModule,
     FormsModule,
-    FiltercitasPipe,
+    
     
 
   ],

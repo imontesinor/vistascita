@@ -22,12 +22,13 @@ export class CirugiasComponent{
     pacientes:Pacientes[];
     pa:Pacientes;
     servicio:Servicios;
+    query:string='';
 
 
-    constructor(public serviceservicio:ServiciosService,public router:ActivatedRoute,public route:Router){}
+    constructor(public serviceservicio:ServiciosService,private router:ActivatedRoute,private route:Router){}
 
     listarCirugia(){
-    this.serviceservicio.listarCirugia(this.total,this.tamano).subscribe((dato:any) => {
+    this.serviceservicio.listarCirugia(this.p,this.tamano).subscribe((dato:any) => {
         console.log(dato);
         setTimeout(()=>{
             this.cirugias=dato.content;

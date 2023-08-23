@@ -2,6 +2,7 @@ import { Component, Input, Output,EventEmitter} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Route, Router } from "@angular/router";
 import { Cirugias } from "app/model/cirugias";
+import { Citas } from "app/model/citas";
 import { Estados } from "app/model/estados";
 import { Servicios } from "app/model/servicios";
 import { ServiciosService } from "app/services/servicios.service";
@@ -14,9 +15,9 @@ import Swal from "sweetalert2";
 
 export class FormularioCirugiaComponent{
     formCirugia:FormGroup;
-    cirugia:Cirugias;
+    cirugia:Cirugias= new Cirugias();
     @Input() cirugiare: Cirugias;   
-    @Output() propagarCx= new EventEmitter<Object>();
+    @Output() propagar= new EventEmitter<Object>();
     estados:Estados[];
     servicios:Servicios[];
     tamano:number=8;
@@ -26,7 +27,7 @@ export class FormularioCirugiaComponent{
     
 
 
-    constructor(private serviceservicio:ServiciosService,router:Router,private route:ActivatedRoute,private fb:FormBuilder){
+    constructor(public serviceservicio:ServiciosService,public router:Router,public route:ActivatedRoute,public fb:FormBuilder){
         this.idPacienteUrl=this.route.snapshot.paramMap.get('id')
         this.formCirugia=this.fb.group({
             id:'',
@@ -45,15 +46,19 @@ export class FormularioCirugiaComponent{
        this.listarEstados();
         this.listServiciosp();
     }
+
+    resetCx(){
+        return this.cirugia=null;
+    }
     
     agregarcirugia(cirugia:any){
         cirugia.value.paciente={'id':this.idPacienteUrl};
-         this.serviceservicio.guardarCirugia(cirugia.value).subscribe((dato:any)=>{
+         this.serviceservicio.guardarCirugia(cirugia.value).subscribe((dato)=>{
             console.log(dato);
             Swal.fire('mensaje',`la cirugia se asigno en la fecha ${cirugia.value.fecha} correctamente`,'success');
             this.formCirugia.reset();
             this.cirugia=null;
-            this.propagarCirugia();
+           this.propagarCirugia();
 
         })
     }
@@ -63,8 +68,8 @@ export class FormularioCirugiaComponent{
         this.agregarcirugia(this.formCirugia);
     }
     propagarCirugia(){
-        this.propagarCx.emit(this.cirugia);
-    }
+      this.propagar.emit(this.cirugia);}
+        
   ngOnChanges():void{
         if(this.cirugiare){
             this.formCirugia.patchValue(this.cirugiare);

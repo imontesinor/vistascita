@@ -29,6 +29,9 @@ import { FormularioEstadosComponent } from 'app/pages/componentes/estados/formul
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LoginComponent } from 'app/pages/componentes/usuarios/login.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 
@@ -40,7 +43,11 @@ import { LoginComponent } from 'app/pages/componentes/usuarios/login.component';
     ReactiveFormsModule,
     FormsModule,
 
-    NgbModule,NgxPaginationModule
+    NgbModule,NgxPaginationModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule
+   
   ],
   declarations: [
     DashboardComponent,
@@ -64,7 +71,8 @@ import { LoginComponent } from 'app/pages/componentes/usuarios/login.component';
     FormularioCitasComponent,
     FormularioCirugiaComponent,
     FormularioCitasDetaComponent,
-   FormularioEstadosComponent
+   FormularioEstadosComponent,
+    
     
     ]
 })

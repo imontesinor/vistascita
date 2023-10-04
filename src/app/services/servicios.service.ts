@@ -200,6 +200,16 @@ export class ServiciosService {
     );
   }
 
+  filtrarNombreServicio(id:any){
+    return this.http.get<Servicios[]>(this.URL_BACKEND+`api/servicios/listarnombre?id=${id}`,{ headers: this.agregarAthorizationHeaders()}).pipe(
+      catchError(e => {
+        this.isNoAutorizado(e);
+        return throwError(e); 
+      })
+    );
+  }
+  
+
   filtrarPaci(id: any) {
 
     return this.http.get<Pacientes[]>(this.URL_BACKEND + `api/pacientes/buscarpac?id=${id}&pagina=0&size=8`, { headers: this.agregarAthorizationHeaders() }).pipe(
@@ -259,7 +269,7 @@ export class ServiciosService {
 
 
 
-  listserviciosp() {
+  listserviciosp():Observable<Servicios[]> {
     return this.http.get<Servicios[]>(this.URL_BACKEND + 'api/servicios/consultasp', { headers: this.agregarAthorizationHeaders() }).pipe(
       catchError(e => {
         this.isNoAutorizado(e);

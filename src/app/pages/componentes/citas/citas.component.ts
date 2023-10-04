@@ -122,7 +122,7 @@ export class CitasComponent {
     }*/
   listarFiltro(query: string) {
     this.clickSubject.next(query)
-    console.log('filtro123', query)
+    console.log('filtroPacienteultimo', query)
   }
 
 

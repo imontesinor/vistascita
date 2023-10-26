@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Citas</h4>
+          <!--<input #inputstring (keyup)="capturarString(inputstring.value)" type="text" class="form-control" placeholder="Entidad"/>-->
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+  
+  
+            <table   class="table">
+           
+             
+             <thead class=" text-primary"> 
+                
+            
+            <!--
+             
+                <th>id</th>
+  
+                <th>
+                  Cedula
+                </th>
+                <th>
+                 Nombres y Apellidos
+  
+                </th>
+  
+                 <th>
+                  Entidad
+                </th>-->
+              </thead>
+              <tbody>
+               
+                <td >{{idPaciente}}</td>
+                  <td >{{paciente?.paciente?.cedula}}</td>
+                  <td >{{paciente?.paciente?.nombre}} {{paciente?.paciente?.apellidos}}</td>
+                  <td >{{paciente?.paciente?.entidad}}</td>
+     
+                 
+               
+                
+                            </tbody>
+                          
+                <thead class=" text-primary"> 
+                  <tr><td>
+                    <input type="text"  [(ngModel)]="query" placeholder="Search...."></td>
+                  
+                  <td>
+                <button (click)="listarFiltro()"  class="btn btn-primary btn-round">FILTRAR</button></td>
+              </tr> 
+                <th>Estado</th>
+                <th>fecha</th>
+                <th>nombres</th>
+                <th>Numero Identificacion</th>
+                <th>servicios</th>
+              </thead>
+                  <tbody>
+                   
+              
+                    <tr *ngFor="let c of citas  | paginate: {itemsPerPage: tamano,currentPage:p,totalItems:total}">
+                      
+                      <td>{{c.estado?.nombre }}</td>
+                    <td>{{c?.fecha | date:"yyyy-MM-dd"}}  </td>
+                  <td>{{c.paciente?.nombre }} {{paciente?.apellidos}}</td>
+                   <td>{{c.paciente?.cedula}}</td>
+                    <td>{{c.servicio?.nombre}}</td>
+                    <button (click)="seleccionCita(c)" class="btn btn-primary btn-round">Seleccionar</button>
+                
+                  </tr>
+                  </tbody>
+                            </table>
+                            <pagination-controls previousLabel="Anterior"  nextLabel="Siguiente" (pageChange)="p=$event; listarCitas();"></pagination-controls>
+                          </div></div></div></div>              
+    <div class="col-md-14">
+      <div>
+          <app-formulario-citasdeta (propagarCita)=" listarCitas()"  [citarecibo]="cita"></app-formulario-citasdeta>
+        </div></div>
+                    

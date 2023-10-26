@@ -1,0 +1,63 @@
+
+    <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"> Pacientes</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+        
+        
+                  <table   class="table">
+                 
+                   
+                   <thead class=" text-primary"> 
+   
+   <th> id</th>
+   <th> cedula</th>
+                  
+</thead>
+<tbody>
+
+       
+            <td>
+           {{paciente?.paciente?.id}}</td>
+          <td> {{paciente?.paciente?.cedula}}</td>
+            
+
+</tbody>
+
+
+<h4 class="card-title">Cirugias </h4>
+<thead class=" text-primary">
+
+ 
+<input type="text" [(ngModel)]="query" placeholder="Search.....">
+     <th> Estado</th>
+     <th> Servicio</th>
+     <th> Paciente </th>
+    <th> fecha</th>
+    <th> Id </th>
+</thead>
+<tbody>
+   
+        <tr *ngFor="let ci of cirugias | paginate:{itemsPerPage: tamano,currentPage:p,totalItems:total}">
+            <td>{{ci.estado?.nombre}}</td>
+            <td>{{ci.servicio?.nombre}} {{paciente?.apellido}}</td>
+            <td>{{ci.paciente?.nombre}}</td>
+            <td>{{ci?.fecha | date:"yyyy-MM-dd"}} </td>
+            <td>{{ci?.id}}</td>
+            <button (click)="seleccionCirugia(ci)" class="btn btn-primary btn-round">Seleccionar</button>
+        </tr>
+      </tbody>
+    </table> 
+    <pagination-controls previousLabel="Anterior"  nextLabel="Siguiente" (pageChange)="p=$event; listarCirugia();"></pagination-controls>
+  </div></div>
+</div> 
+</div>
+
+<div class="col-md-14">
+  <div>
+    <app-formulario-cirugias (propagar)="listarCirugia()" [cirugiare]="cirugia"></app-formulario-cirugias>
+  </div></div>

@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Lista de Estados</h4>
+        <!--<input #inputstring (keyup)="capturarString(inputstring.value)" type="text" class="form-control" placeholder="Entidad"/>-->
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+
+
+              <th>
+                codigo
+
+              </th>
+              <th> Nombre</th>
+
+
+            </thead>
+
+            <tbody>
+
+              <tr
+                *ngFor="let p of empresas | paginate: { itemsPerPage: tamano, currentPage: p, totalItems:total }">
+                  
+
+                <td> {{p?.codigo}} </td>
+                <td>{{p?.nombre}}</td>
+
+
+            </tbody>
+          </table>
+          <pagination-controls previousLabel="Anterior" nextLabel="Siguiente"
+            (pageChange)="p=$event; listarEmpresas();"></pagination-controls>
+
+        </div>
+
+      </div>
+     
+    </div>
+  </div>
+

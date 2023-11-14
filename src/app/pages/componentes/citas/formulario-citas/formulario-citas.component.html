@@ -61,7 +61,7 @@
               <mat-form-field style="border: 1px;">
                 <input  placeholder="Selecciona una opción" type="text" matInput  formControlName="servicio" [matAutocomplete]="auto"  >
                 <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn" >  
-                  <mat-option *ngFor="let servi of filtroServicios | async " [Value]="servi">
+                  <mat-option *ngFor="let servi of filtroServicios | async " [value]="servi">
                    {{ servi.nombre }}
                   </mat-option>
                 </mat-autocomplete>

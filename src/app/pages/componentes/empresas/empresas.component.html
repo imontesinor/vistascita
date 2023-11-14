@@ -12,23 +12,25 @@
 
 
               <th>
-                codigo
+                id
 
               </th>
+              <th> Codigo</th>
+                 
               <th> Nombre</th>
-
+              <th> Estado</th>
 
             </thead>
 
             <tbody>
 
               <tr
-                *ngFor="let p of empresas | paginate: { itemsPerPage: tamano, currentPage: p, totalItems:total }">
-                  
-
-                <td> {{p?.codigo}} </td>
-                <td>{{p?.nombre}}</td>
-
+                *ngFor="let emp of empresas | paginate: { itemsPerPage: tamano, currentPage: p, totalItems:total }">
+                <td> {{emp?.id}} </td>                
+                <td> {{emp?.codigo}} </td>
+                <td>{{emp?.nombre}}</td>
+                <td> {{emp?.estado}} </td>
+                  <button  (click)="seleccionEmpre(emp)">seleccion</button>
 
             </tbody>
           </table>
@@ -42,3 +44,4 @@
     </div>
   </div>
 
+  <app-formulario-empresas [emprerecibo]="empresa" (evento)="listarEmpresas()" ></app-formulario-empresas>

@@ -1,6 +1,7 @@
 import  {Component,OnInit,Output,EventEmitter,Input} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import  {Router} from '@angular/router';
+import { Empresas } from 'app/model/empresas';
 import  {Pacientes} from 'app/model/pacientes';
 import { ServiciosService } from 'app/services/servicios.service';
 import Swal from 'sweetalert2';
@@ -14,6 +15,7 @@ export class FormularioPacientesComponent{
    formCamilo:FormGroup;
   @Output() propagar= new EventEmitter<Object>() ;
    pacientes :Pacientes= new Pacientes();
+   empresa:Empresas;
   // @Output() mostrar= new EventEmitter<Object>()
   @Input() pacirecibo:Pacientes;
   constructor(public servicioservice:ServiciosService,public router:Router,public fb:FormBuilder){
@@ -24,7 +26,8 @@ export class FormularioPacientesComponent{
       apellidos: '',
       direccion: '',
       telefono: '',
-      entidad: ''
+      entidad: '',
+      empresa:''
     })
   }
 

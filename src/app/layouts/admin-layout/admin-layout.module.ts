@@ -34,6 +34,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { EmpresasComponent } from 'app/pages/componentes/empresas/empresas.component';
+import { FormularioEmpresasComponent } from 'app/pages/componentes/empresas/formulario-empresas/formulario-empresas.component';
 
 
 
@@ -76,6 +77,7 @@ import { EmpresasComponent } from 'app/pages/componentes/empresas/empresas.compo
     FormularioCirugiaComponent,
     FormularioCitasDetaComponent,
    FormularioEstadosComponent,
+   FormularioEmpresasComponent,
     
     
     ]

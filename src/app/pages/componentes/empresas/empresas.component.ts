@@ -33,4 +33,9 @@ listarEmpresas(){
 ngOnInit(){
     this.listarEmpresas();
 }
+
+seleccionEmpre(empre:Empresas){
+    console.log('seleccionempre',this.empresa=empre);
+
+}
 }

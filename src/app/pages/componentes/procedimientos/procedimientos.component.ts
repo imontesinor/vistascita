@@ -16,13 +16,13 @@ export class ProcedimientosComponent{
   total:number=0;
   procedimientos:Procedimientos[];
   procedimiento:Procedimientos;
-  @Input() enviar: Servicios;
+ 
 
     constructor(public serviservice:ServiciosService,private router:ActivatedRoute,private route:Router){        
     }
 
-    seleccionPro(p:Procedimientos){
-      console.log('seleccionPr',this.procedimiento=p);
+    seleccionPro(pr:Procedimientos){
+      console.log('seleccionPr',this.procedimiento=pr);
     }
 
     listarProcedimientos(){

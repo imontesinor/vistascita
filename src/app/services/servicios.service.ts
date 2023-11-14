@@ -184,6 +184,15 @@ export class ServiciosService {
       })) 
      }
 
+     guardarEmpresa(empresa:Empresas){
+     return this.http.post(this.URL_BACKEND+`api/empresa/guardar`,empresa,{ headers: this.agregarAthorizationHeaders() }).pipe(
+      catchError(e => {
+        this.isNoAutorizado(e);
+        return throwError(e);
+      })) 
+
+     }
+
      guardarProcedimientos(procedimientos:Procedimientos){
       return this.http.post(this.URL_BACKEND+`api/procedimientos/crear`, procedimientos, { headers: this.agregarAthorizationHeaders() }).pipe(
         catchError(e => {
@@ -246,6 +255,16 @@ export class ServiciosService {
       })
     );
   }
+
+filtroEmpresa(nombre:any){
+  return this.http.get<Empresas[]>(this.URL_BACKEND+`api/empresas/filtroempresas?id=${nombre}`,{ headers: this.agregarAthorizationHeaders() }).pipe(
+    catchError(e => {
+      this.isNoAutorizado(e);
+      return throwError(e);
+    })
+  )
+}
+
 
   guardarServicios(servicios: Servicios): Observable<Object> {
     return this.http.post(this.URL_BACKEND + 'api/servicios/create', servicios, { headers: this.agregarAthorizationHeaders() }).pipe(

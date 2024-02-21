@@ -16,16 +16,16 @@ templateUrl: 'formulario-estados.component.html'
 
 export class FormularioEstadosComponent{
 
-    formEstado:FormGroup;
+    formEstado:FormGroup= this.fb.group({
+        id:'',
+        nombre:'',
+    });
     estado:Estados= new Estados;
     @Output() propagares= new EventEmitter<Object>();
     @Input() estarecibo:Estados;
 
     constructor(public serviceservice:ServiciosService,public router:Router,public fb:FormBuilder){
-        this.formEstado=fb.group({
-            id:'',
-            nombre:''
-        })
+     
     }
 
     guardarEstado(estado:any){
@@ -62,4 +62,8 @@ export class FormularioEstadosComponent{
        }
     }
 
+
+
 }
+
+

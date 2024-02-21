@@ -4,6 +4,7 @@ import  {Router} from '@angular/router';
 import { Empresas } from 'app/model/empresas';
 import  {Pacientes} from 'app/model/pacientes';
 import { ServiciosService } from 'app/services/servicios.service';
+import { Observable, debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({ 
@@ -12,44 +13,63 @@ import Swal from 'sweetalert2';
 })
 
 export class FormularioPacientesComponent{
-   formCamilo:FormGroup;
-  @Output() propagar= new EventEmitter<Object>() ;
+   formCamilo:FormGroup= this.fb.group({
+    id:'',
+    cedula:'',
+    nombre:'',
+    apellidos: '',
+    direccion: '',
+    telefono: '',
+    empresa:''
+  
+  });
+   @Output() propagar = new EventEmitter<Object>();
    pacientes :Pacientes= new Pacientes();
    empresa:Empresas;
+   filterEmpresa:any;
+   filterValue:any;
   // @Output() mostrar= new EventEmitter<Object>()
   @Input() pacirecibo:Pacientes;
   constructor(public servicioservice:ServiciosService,public router:Router,public fb:FormBuilder){
-    this.formCamilo = this.fb.group({
-      id:'',
-      cedula:'',
-      nombre:'',
-      apellidos: '',
-      direccion: '',
-      telefono: '',
-      entidad: '',
-      empresa:''
+   this.filterEmpresa= this.formCamilo.get('empresa').valueChanges.pipe(
+    startWith(''),
+    debounceTime(400),
+    distinctUntilChanged(),
+    switchMap((val:any)=>{
+      let v= this._filterEmpresa(val);
+      return v;
     })
+   )
+ 
   }
 
   ngOnInit(){
    
   }
 
+  private _filterEmpresa(val:any):Observable<Empresas[]>{
+  this.filterValue= val?.nombre == undefined ? val:val.nombre;
+  return this.servicioservice.filtroEmpresa(this.filterValue);
+  }
+
+  displayFn(s): any {
+    return s?.nombre;
+  }
+
+  
 
   
 
  public guardarPaciente(paciente:any){
  
-  this.servicioservice.guardarPacientes(paciente.value).subscribe(
-    dato=>{
-      console.log(dato);
-    Swal.fire(`paciente creado ${paciente.value.nombre} ${paciente.value.apellidos } `,'con exito');
-    this.formCamilo.reset();
-      this.pacientes.nombre=null;
-     this.irPaciente();
-    }
-    )
+  this.servicioservice.guardarPacientes(paciente.value).subscribe(dato =>{
 
+    console.log(dato);
+    Swal.fire("mensaje",`Paciente ${paciente.value.nombre} ${paciente.value.apellidos} guardado con exito `, 'success')
+    this.formCamilo.reset();
+    this.pacientes= null;
+    this.irPaciente();
+  })
 
  }
  nuevoPaciente(){
@@ -70,12 +90,10 @@ export class FormularioPacientesComponent{
 
 ngOnChanges(): void {
 
- if(this.pacirecibo){
-this.formCamilo.patchValue(this.pacirecibo)
-}
-  else this.pacientes=new Pacientes();{
-
-  }
+if(this.formCamilo){
+  this.formCamilo.patchValue(this.pacirecibo)
+}else
+this.pacirecibo= new Pacientes;
 
  }
 
@@ -85,9 +103,4 @@ this.formCamilo.patchValue(this.pacirecibo)
   //Add '${implements OnChanges}' to the class.
 
 }
-
-
-
-
-
 

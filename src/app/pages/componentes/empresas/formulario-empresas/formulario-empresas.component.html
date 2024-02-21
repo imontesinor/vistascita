@@ -1,6 +1,7 @@
-
-<thead>Formulario Empresas</thead>
-
+<div class="card-header">
+    <h2 class="card-title">Formulario Empresas</h2>
+  </div>
+  <div class="card-body">
 <form [formGroup]="formuEmpresa" (ngSubmit)="onSubmit()">
 <tbody>
     <label>id</label>
@@ -9,11 +10,20 @@
     <input type="text" name="Codigo" placeholder="Codigo" class="form-control" formControlName="codigo">
     <label>Nombre</label>
     <input type="text" name="nombre" placeholder="nombre" class="form-control" formControlName="nombre">
-    <label>Estado</label>
-    <input type="text" name="estado" placeholder="estado" class="form-control"  formControlName="estado">
-
-    <button type="submit" class="btn btn-primary btn-round"> Guardar</button>
-    <div></div><div></div><div></div><div></div><div></div>
-    
+   <!-- <label>Estado</label>
+    <input type="text" name="estado" placeholder="estado" class="form-control"  formControlName="estado">-->
+    <div class="row">
+        <div class="update ml-auto mr-auto">
+    <button type="submit" class="btn btn-primary btn-round"> Guardar y Editar</button>
+</div></div>
 </tbody>
 </form>
+
+<div class="row">
+    <div class="update ml-auto mr-auto">
+      <form><button (click)="reset()" class="btn btn-primary btn-round">nuevo</button> </form>
+
+    </div>
+  </div>
+
+</div>

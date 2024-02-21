@@ -3,21 +3,15 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveF
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Citas } from 'app/model/citas';
 import { Pacientes } from 'app/model/pacientes';
-//import { Servicios } from 'app/model/servicios'
 import { ServiciosService } from 'app/services/servicios.service';
 import Swal from 'sweetalert2';
-import { formatDate } from '@angular/common';
 import { Estados } from 'app/model/estados';
-import { stringify } from 'querystring';
-import { Observable, Subject } from 'rxjs'
-import { startWith, map, debounceTime, distinctUntilChanged, switchMap, filter } from 'rxjs/operators';
-import { query } from 'chartist';
-import { newArray } from '@angular/compiler/src/util';
+import { Observable, Subject, throwError } from 'rxjs'
+import { startWith, map, debounceTime, distinctUntilChanged, switchMap, filter, catchError } from 'rxjs/operators';
 import { Servicios } from 'app/model/servicios';
-import { data } from 'jquery';
-import { response } from 'express';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { makeParsedTranslation } from '@angular/localize/src/utils';
+import { error } from 'console';
+import { errorMonitor } from 'events';
+
 
 
 
@@ -83,8 +77,6 @@ export class FormularioCitasComponent implements OnInit {
       })
     );
 
-    // console.log("filter constructor",this.filtroServicios);
-
 
     this.idPacienteUrl = this.route.snapshot.paramMap.get('id');
 
@@ -93,7 +85,6 @@ export class FormularioCitasComponent implements OnInit {
 
   onOptionSelected(event: any) {
     const selectedOption: any = event.option.value;
-    // Handle the selected option here
     console.log('Selected option: ' + selectedOption);
   }
 
@@ -105,31 +96,11 @@ export class FormularioCitasComponent implements OnInit {
 
 
 
-  /* this.servicioservice.filtrarNombreServicio(query).subscribe(servicio =>{
-     console.log('escogeservi',this.options=servicio);
-     
-   });
-   return this.options;
-   const filterValue = nombre.toLowerCase();
-   console.log('filtroprueduar',nombre);
- 
-   return this.options.filter(servi => servi.nombre.toLowerCase().includes(filterValue));*/
 
 
   ngOnInit(): void {
-    // this.listServiciosp();
+
     this.listarEstados();
-    /*
-     this.filtroServicios = this.servicioControl.valueChanges.pipe(
-        startWith<string| User>(''),
-        map(value => {
-          const nombre = typeof value === 'string' ? value : value?.nombre;
-         
-          return nombre ? this._filterServices(nombre as string) : this.options.slice();
-        }),
-      );*/
-
-
 
   }
 
@@ -138,30 +109,22 @@ export class FormularioCitasComponent implements OnInit {
   }
 
 
-  /*filtrarServicio(query:string){
-     this.clickSubjet.pipe(
-      debounceTime(1000),
-      distinctUntilChanged(),
-      switchMap(query => this.servicioservice.filtrarNombreServicio(query))
-    ).subscribe(dato=> console.log('cambiodatos',dato));
-    this.clickSubjet.next(query);
-    console.log('quermontesino',query)
-  }*/
-
   guardarCitas(cita: any) {
     console.log('guardarCitas', cita.value);
     cita.value.paciente = { 'id': this.idPacienteUrl };
-    this.servicioservice.guardarCita(cita.value).subscribe(dato => {
+    
+   
+   
+ this.servicioservice.guardarCita(cita.value).subscribe(dato => {
       console.log(dato);
-      Swal.fire(`Cita asignada con fechab ${cita.value.fecha} correctamente `)
+      Swal.fire(`Cita asignada con fechab ${cita.value.fecha} correctamente `,'success')
+      
       this.formCitas.reset();
       this.cita = null;
       this.irCitas();
 
 
     })
-
-
 
   }
 
@@ -199,14 +162,6 @@ export class FormularioCitasComponent implements OnInit {
   }
 
 
-  /*private filterServices(query:string) {
- const filterValue= query.toLocaleLowerCase();
- console.log('queryquery',query)
-     return this.Items.filter((servicio:any) =>
-       servicio.toLowerCase().indexOf(filterValue) === 0); 
-       
-   }*/
-
 
   seleccionEstado(e1: Estados, e2: Estados) {
     return e1 == undefined || e2 == undefined ? false : e1.id === e2.id
@@ -224,8 +179,5 @@ export class FormularioCitasComponent implements OnInit {
     }
 
   }
-
-
-
 
 }

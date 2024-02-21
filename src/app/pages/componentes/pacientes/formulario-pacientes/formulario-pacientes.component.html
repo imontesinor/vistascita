@@ -14,10 +14,11 @@
    
 
 
+          <h1>{{pacirecibo?.nombre}}</h1>
 
           <label>id</label>
 
-          <input type="text"  class="form-control" disabled="disabled" placeholder="Id" formControlName="id"  value="id" >
+          <input type="text" disabled="disabled" placeholder="id" class="form-control" formControlName="id" value="id">
 
 
   <label> Nombres </label>
@@ -34,9 +35,17 @@
             <input type="text" class="form-control" placeholder="Direccion" formControlName="direccion" value="direccion">
             <label >Telefono</label>
             <input type="text" class="form-control" placeholder="Telefono" formControlName="telefono" value="telefono">
-            <label >Entidad</label>
-           <input type="text" class="form-control" placeholder="Entidad"  formControlName="entidad" valude="entidad">
-      
+           
+
+           <mat-form-field>
+            <label>Empresa</label>
+            <input style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"   class="form-control"  placeholder="Selecciona una opción" type="text" formControlName="empresa"  matInput  [matAutocomplete]="auto"  >
+            <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn" >  
+              <mat-option *ngFor="let emp of filterEmpresa | async " [value]="emp">
+               {{ emp.nombre }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
 
         </div>
 
@@ -51,10 +60,4 @@
           <button type="submit" class="btn btn-primary btn-round">Editar y Guardar</button></div>
 
         </div>
-
-
-
-
-
-
 

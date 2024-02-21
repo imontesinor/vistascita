@@ -27,8 +27,8 @@ export class FormularioEmpresasComponent{
     this.formuEmpresa=fb.group({
         id:'',
         codigo:'',
-        nombre:'',
-        estado:''
+        nombre:''
+        //estado:''
 
     })
 
@@ -68,5 +68,3 @@ export class FormularioEmpresasComponent{
 
 
 }
-
-

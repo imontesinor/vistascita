@@ -4,6 +4,8 @@ import { Pacientes } from 'app/model/pacientes';
 import { ActivatedRoute,Router } from '@angular/router';
 import { ServiciosService } from 'app/services/servicios.service';
 import Swal from 'sweetalert2';
+import { Subject, debounce, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { relative } from 'path';
 
 @Component({
     selector: 'app-pacientes',
@@ -11,16 +13,16 @@ import Swal from 'sweetalert2';
 })
 
 export class PacientesComponent{
-
+     searchSubjetc = new Subject<string>();
      id:any;
   pacientes: Pacientes[];
   pacirecibo:Pacientes;
    p:number=1;
     tamano:number=8;
     total:number=0;
-    @Output() enviar=new EventEmitter<Object>();
+  
     pacien:Pacientes;
-    query:'';
+    //query:'';
 
 
     constructor(
@@ -28,13 +30,16 @@ export class PacientesComponent{
 
     ngOnInit(): void {
       this.listarPacientes();
+      this.filtrarPacientes();
     }
 
     filtrarPacientes(){
-      if(this.pacientes==null){
-        Swal.fire('mensaje','No se encuentra datos','info')
-       }  
-      this.serviciosservice.filtrarPaci(this.query).subscribe((dato:any) => {
+       this.searchSubjetc.pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        switchMap((query:string)=> this.serviciosservice.filtrarPaci(query))
+       )
+      .subscribe((dato:any) => {
        
         console.log('filtroPaciente',dato);
            
@@ -48,10 +53,11 @@ export class PacientesComponent{
     
     }
 
+    onSearchChange(query:string){
+      this.searchSubjetc.next(query);
+    }
 
-   filPaciente():any{
-   return this.pacientes.filter(pa => pa.nombre.toLowerCase().includes(this.query.toLowerCase()));
-   }
+
 
     listarPacientes() {
       this.serviciosservice
@@ -73,9 +79,11 @@ console.log(this.pacien=pa);
 
 
 citaPaciente(id:number){
-  console.log('ivan',id);
+  console.log('idcita',id);
    this.router.navigate([`/citas/${id}`], { relativeTo: this.route });
-  
+
+
+   
 }
 
 irCirugia(id:number){
@@ -88,5 +96,8 @@ irCirugia(id:number){
 capturarString(filtro){
   listarPacientes(filtro)
 }*/
+
+
+
 
 }

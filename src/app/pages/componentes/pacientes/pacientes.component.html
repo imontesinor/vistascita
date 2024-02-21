@@ -1,67 +1,65 @@
 <div class="row">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title"> Pacientes</h4>
-          <!--<input #inputstring (keyup)="capturarString(inputstring.value)" type="text" class="form-control" placeholder="Entidad"/>-->
-        </div>
-        <div class="card-body">
-        <div class="table-responsive">
-          <td > <input type="text" [(ngModel)]="query" placeholder="Search........"></td>
-
-     <td> <button  (click)="filtrarPacientes()" class="btn btn-primary btn-round"> FILTRAR</button></td>
-     
-          <td></td>
-          <td></td>
-            <table class="table">
-          
-              <thead class=" text-primary">
-               
-                <th> 
-                  Cedula
-                </th>
-                <th>
-                 Nombres y Apellidos
-
-                </th>
-
-                 <th>
-                  Entidad
-                </th>
-              </thead>
-              <tbody>
-                
-                <tr  *ngFor=" let pa of pacientes | paginate: {itemsPerPage: tamano,currentPage:p,totalItems:total} ">
-                  
-                
-
-                  <td >{{pa.cedula}}</td>
-                  <td >{{pa.nombre}}</td>
-                  <td >{{pa.nombre}} {{pa.apellidos}}</td>
-                  <td >{{pa.entidad}}</td>
-
-                
-                    <td><button (click)="buscarId(pa)"  class="btn btn-primary btn-round">Detalle</button>
-                   </td>
-                 <td> <div class="update ml-auto mr-auto">
-        <button type="submit" class="btn btn-primary btn-round" (click)="citaPaciente(pa.id)">cita</button>
-       
-      </div> 
-      <td>
-        <div div class="update ml-auto mr-auto">
-          <button type="submit" class="btn btn-primary btn-round" (click)="irCirugia(pa.id)">Cirugia</button></div>
-
-                <td class="text-right">
-              </tbody>
-
-            </table>
-            <pagination-controls previousLabel="Anterior"  nextLabel="Siguiente" (pageChange)="p=$event; listarPacientes();"></pagination-controls>
-          </div>
-        </div>
-           </div>
-    </div>
-    <div class="col-md-6">
-    <app-formulario-pacientes (propagar)="listarPacientes()"  [pacirecibo]="pacien"></app-formulario-pacientes>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title"> Pacientes</h4>
+        <!--<input #inputstring (keyup)="capturarString(inputstring.value)" type="text" class="form-control" placeholder="Entidad"/>-->
       </div>
+      <div class="card-body">
+      <div class="table-responsive">
+        <td > <input type="text" (input)="onSearchChange($event.target.value)" placeholder="Search........"></td>
 
+  
+   
+        <td></td>
+        <td></td>
+          <table class="table">
+        
+            <thead class=" text-primary">
+             
+              <th> 
+                Cedula
+              </th>
+              <th>
+               Nombres y Apellidos
 
+              </th>
+
+               <th>
+                Entidad
+              </th>
+            </thead>
+            <tbody>
+              
+              <tr  *ngFor=" let pa of pacientes | paginate: {itemsPerPage: tamano,currentPage:p,totalItems:total} ">
+                
+              
+
+                <td >{{pa.cedula}}</td>
+                <td >{{pa.nombre}}</td>
+                <td >{{pa.nombre}} {{pa.apellidos}}</td>
+                <td >{{pa.entidad}}</td>
+
+              
+                  <td><button (click)="buscarId(pa)"  class="btn btn-primary btn-round">Detalle</button>
+                 </td>
+               <td> <div class="update ml-auto mr-auto">
+      <button type="submit" class="btn btn-primary btn-round" (click)="citaPaciente(pa.id)">cita</button>
+     
+    </div> 
+    <td>
+      <div div class="update ml-auto mr-auto">
+        <button type="submit" class="btn btn-primary btn-round" (click)="irCirugia(pa.id)">Cirugia</button></div>
+
+              <td class="text-right">
+            </tbody>
+
+          </table>
+          <pagination-controls previousLabel="Anterior"  nextLabel="Siguiente" (pageChange)="p=$event; listarPacientes();"></pagination-controls>
+        </div>
+      </div>
+         </div>
+  </div>
+  <div class="col-md-6">
+  <app-formulario-pacientes (propagar)="listarPacientes()"  [pacirecibo]="pacien"></app-formulario-pacientes>
+    </div>

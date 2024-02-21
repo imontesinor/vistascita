@@ -21,7 +21,7 @@ export class CirugiasComponent{
     paciente:Pacientes;
     pacientes:Pacientes[];
     pa:Pacientes;
-    servicio:Servicios;
+   // servicio:Servicios;
     query:string='';
 
 
@@ -37,6 +37,7 @@ export class CirugiasComponent{
     })
    
     }
+
 buscarIdPaciente(){
         this.idPaciente = this.router.snapshot.paramMap.get('id');
         this.serviceservicio.buscarIdPaciente(this.idPaciente).subscribe(
@@ -57,17 +58,8 @@ buscarIdPaciente(){
         this.buscarIdPaciente();
        
     }
-  
-    ngOnchanges():void{
-      if(this.servicio){
-       
-      }
-      else{
-       this.servicio=null   
-      }
-    }
-   
-    
+
+
 
     
 }

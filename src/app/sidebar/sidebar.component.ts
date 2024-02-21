@@ -15,14 +15,14 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard',     title: 'Dashboard',         icon:'nc-bank',       class: '' },
+  //  { path: '/dashboard',     title: 'Dashboard',         icon:'nc-bank',       class: '' },
     { path: '/pacientes',     title: 'Pacientes',         icon:'nc-single-02',  class: '' },
     { path: '/servicios',     title: 'Servicios',         icon:'nc-globe',  class: '' },
     { path: '/estados',       title: 'Estados',           icon:'nc-diamond',    class: '' },
     { path: '/login',         title: 'Usuarios',          icon:'nc-single-02',  class: '' },
-    { path: '/citas',         title: 'PacientexCitas',             icon:'nc-paper',      class: '' },
-    { path: '/citasdeta',         title: 'Citas Detalle',             icon:'nc-paper',      class: '' },
-    { path: '/cirugia',         title: 'Cirugias',             icon:'nc-tile-56',      class: '' },
+  //  { path: '/citas',         title: 'PacientexCitas',             icon:'nc-paper',      class: '' },
+    //{ path: '/citasdeta',         title: 'Citas Detalle',             icon:'nc-paper',      class: '' },
+    //{ path: '/cirugia',         title: 'Cirugias',             icon:'nc-tile-56',      class: '' },
     { path: '/procedimientos',         title: 'Procedimientos',             icon:'nc-spaceship',      class: '' },
     { path: '/empresas',         title: 'Empresas',             icon:'nc-spaceship',      class: '' },
    

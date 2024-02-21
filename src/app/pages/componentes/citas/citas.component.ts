@@ -10,8 +10,9 @@ import { Servicios } from 'app/model/servicios';
 
 import Swal from 'sweetalert2';
 import { Estados } from 'app/model/estados';
-import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs';
 import { query } from 'chartist';
+import { Empresas } from 'app/model/empresas';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class CitasComponent {
   servicio: Servicios[];
   citas: Citas[];
   cita: Citas;
+  empresa:Empresas;
   // query: '';
   estado: Estados;
 
@@ -48,8 +50,7 @@ export class CitasComponent {
       distinctUntilChanged(),
       switchMap(query => this.servicioservice.filtrarId(query))
     )
-
-      .subscribe(
+  .subscribe(
         (dato: any) => {
 
           setTimeout(() => {
@@ -59,9 +60,9 @@ export class CitasComponent {
 
         })
 
-
-
   }
+  
+
 
 
 
@@ -147,5 +148,5 @@ export class CitasComponent {
   }
 
 
-
 }
+

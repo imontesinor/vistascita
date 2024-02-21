@@ -20,7 +20,7 @@ import { Empresas } from 'app/model/empresas';
 export class ServiciosService {
   private _usuario: Usuarios;
   private _token: string;
-  URL_BACKEND = 'http://localhost:8080/';
+  URL_BACKEND = 'http://ec2-18-118-23-196.us-east-2.compute.amazonaws.com:8080/';
   private httpHeaders = new HttpHeaders;
   servicios: Servicios[];
   pacientes: Pacientes[];
@@ -31,6 +31,8 @@ export class ServiciosService {
   usuarios: Usuarios;
   cirugias: Cirugias[];
   cirugia: Cirugias;
+  empresas: Empresas[];
+  empresa: Empresas;
 
   constructor(public http: HttpClient, public route: Router) { }
 
@@ -90,6 +92,8 @@ export class ServiciosService {
     }
     return false;
   }
+  
+
   guardarUsuarioJwt(access_token: string): void {
     let payload = this.obtenerDatosToken(access_token);
     this._usuario = new Usuarios();
@@ -147,7 +151,7 @@ export class ServiciosService {
   }
 
   login(usuario: Usuarios): Observable<any> {
-    const urlEndpoind = 'http://localhost:8080/oauth/token';
+    const urlEndpoind = 'http://ec2-18-118-23-196.us-east-2.compute.amazonaws.com:8080/oauth/token';
     const credenciales = btoa('angularapp' + ':' + '12345');
     const httpHeaders = new HttpHeaders({
       'content-type': 'application/x-www-form-urlencoded',
@@ -176,31 +180,39 @@ export class ServiciosService {
     );
   }
 
-  listarProcedimientos(pagina:number,size:number):Observable<Procedimientos[]> {
-    return this.http.get<Procedimientos[]>(this.URL_BACKEND +  `api/procedimiento/consultar/ ${(pagina ? pagina : 1) - 1},${size}`, { headers: this.agregarAthorizationHeaders() }).pipe(
+  listarProcedimientos(pagina: number, size: number): Observable<Procedimientos[]> {
+    return this.http.get<Procedimientos[]>(this.URL_BACKEND + `api/procedimiento/consultar/ ${(pagina ? pagina : 1) - 1},${size}`, { headers: this.agregarAthorizationHeaders() }).pipe(
       catchError(e => {
         this.isNoAutorizado(e);
         return throwError(e);
-      })) 
-     }
-
-     guardarEmpresa(empresa:Empresas){
-     return this.http.post(this.URL_BACKEND+`api/empresa/guardar`,empresa,{ headers: this.agregarAthorizationHeaders() }).pipe(
+      }))
+  }
+  filtrarProcedimientos(nombre: any) {
+    return this.http.get<Procedimientos>(this.URL_BACKEND + `api/procedimietos/filtro?nombre=${nombre}`, { headers: this.agregarAthorizationHeaders() }).pipe(
       catchError(e => {
         this.isNoAutorizado(e);
         return throwError(e);
-      })) 
+      }))
 
-     }
+  }
 
-     guardarProcedimientos(procedimientos:Procedimientos){
-      return this.http.post(this.URL_BACKEND+`api/procedimientos/crear`, procedimientos, { headers: this.agregarAthorizationHeaders() }).pipe(
-        catchError(e => {
-          this.isNoAutorizado(e);
-          return throwError(e);
-        })) 
+  guardarEmpresa(empresa: Empresas) {
+    return this.http.post(this.URL_BACKEND + `api/empresa/guardar`, empresa, { headers: this.agregarAthorizationHeaders() }).pipe(
+      catchError(e => {
+        this.isNoAutorizado(e);
+        return throwError(e);
+      }))
 
-     }
+  }
+
+  guardarProcedimientos(procedimientos: Procedimientos) {
+    return this.http.post(this.URL_BACKEND + `api/procedimientos/crear`, procedimientos, { headers: this.agregarAthorizationHeaders() }).pipe(
+      catchError(e => {
+        this.isNoAutorizado(e);
+        return throwError(e);
+      }))
+
+  }
   listarCitas(pagina: number, size: number) {
     return this.http.get<Citas[]>(this.URL_BACKEND + `api/citas/consultar/${(pagina ? pagina : 1) - 1},${size}`, { headers: this.agregarAthorizationHeaders() }).pipe(
       catchError(e => {
@@ -219,8 +231,8 @@ export class ServiciosService {
       })
     );
   }
-  listarEmpresa(pagina:number,size:number){
-    return this.http.get<Empresas[]>(this.URL_BACKEND+`api/empresa/consultar/${(pagina ? pagina : 1) - 1},${size}`, { headers: this.agregarAthorizationHeaders() }).pipe(
+  listarEmpresa(pagina: number, size: number) {
+    return this.http.get<Empresas[]>(this.URL_BACKEND + `api/empresa/consultar/${(pagina ? pagina : 1) - 1},${size}`, { headers: this.agregarAthorizationHeaders() }).pipe(
       catchError(e => {
         this.isNoAutorizado(e);
         return throwError(e);
@@ -236,15 +248,22 @@ export class ServiciosService {
     );
   }
 
-  filtrarNombreServicio(id:any){
-    return this.http.get<Servicios[]>(this.URL_BACKEND+`api/servicios/listarnombre?id=${id}`,{ headers: this.agregarAthorizationHeaders()}).pipe(
+  filtrarNombreServicio(id: any) {
+    return this.http.get<Servicios[]>(this.URL_BACKEND + `api/servicios/listarnombre?id=${id}`, { headers: this.agregarAthorizationHeaders() }).pipe(
       catchError(e => {
         this.isNoAutorizado(e);
-        return throwError(e); 
+        return throwError(e);
       })
     );
   }
-  
+  filtroEmpresa(nombre: any) {
+    return this.http.get<Empresas[]>(this.URL_BACKEND + `api/empresa/filtroempresa?nombre=${nombre}`, { headers: this.agregarAthorizationHeaders() }).pipe(
+      catchError(e => {
+        this.isNoAutorizado(e);
+        return throwError(e);
+      })
+    );
+  }
 
   filtrarPaci(id: any) {
 
@@ -256,14 +275,7 @@ export class ServiciosService {
     );
   }
 
-filtroEmpresa(nombre:any){
-  return this.http.get<Empresas[]>(this.URL_BACKEND+`api/empresas/filtroempresas?id=${nombre}`,{ headers: this.agregarAthorizationHeaders() }).pipe(
-    catchError(e => {
-      this.isNoAutorizado(e);
-      return throwError(e);
-    })
-  )
-}
+
 
 
   guardarServicios(servicios: Servicios): Observable<Object> {
@@ -298,24 +310,31 @@ filtroEmpresa(nombre:any){
         if (this.isNoAutorizado(e)) {
           return throwError(e);
         }
+        console.error(e.error.mensaje);
+        Swal.fire('ERROR', e.error.mensaje, 'error');
+        return throwError(e);
       })
-    )
+    );
   }
-  
+
   guardarCita(cita: Citas) {
 
     return this.http.post(this.URL_BACKEND + 'api/citas/guardar', cita, { headers: this.agregarAthorizationHeaders() }).pipe(
       catchError(e => {
-        this.isNoAutorizado(e);
+        if (this.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+        console.error(e.error.mensaje);
+        Swal.fire('ERRORr', e.error.mensaje, 'error');
         return throwError(e);
       })
-    )
+    );
   }
 
 
 
 
-  listserviciosp():Observable<Servicios[]> {
+  listserviciosp(): Observable<Servicios[]> {
     return this.http.get<Servicios[]>(this.URL_BACKEND + 'api/servicios/consultasp', { headers: this.agregarAthorizationHeaders() }).pipe(
       catchError(e => {
         this.isNoAutorizado(e);

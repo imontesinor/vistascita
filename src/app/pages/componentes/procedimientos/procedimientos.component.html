@@ -24,13 +24,15 @@
 
               <tr
                 *ngFor="let pr of procedimientos | paginate: { itemsPerPage: tamano, currentPage: p, totalItems:total }">
-                  
-               <td>
-                {{pr?.nombre}} </td>
+
+                <td>
+                  {{pr?.nombre}} </td>
                 <td>{{pr?.cups}}
 
-                <td><button (click)="seleccionPro(pr)" class="btn btn-primary btn-round">Seleccion</button></td>
-              </tr> <td class="text-right">
+               <button (click)="seleccionPro(pr)" class="btn btn-primary btn-round">Seleccion</button>
+              </td>
+              </tr>
+              <td class="text-right">
 
             </tbody>
           </table>
@@ -40,13 +42,14 @@
         </div>
 
       </div>
-     
+
     </div>
   </div>
 
   <div class="col-md-6">
+    <div class="row">
+      <div class="card">
+    <app-formulario-procedimientos (eventop)="listarProcedimientos()" [enviar]="procedimiento"></app-formulario-procedimientos>
 
-  <app-formulario-procedimientos (eventop)="listarProcedimientos()"  [enviar]="procedimiento"></app-formulario-procedimientos>
-  
-   </div>
   </div>
+</div>

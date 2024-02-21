@@ -1,45 +1,55 @@
-
 <div class="card card-user">
-    <div class="card-header">
-      <h2 class="card-title">Guardar Cirugia</h2>
-    </div>
+  <div class="card-header">
+    <h2 class="card-title">Guardar Cirugia</h2>
+  </div>
+ 
+ 
+  
+  <div class="card-body">
+
+      <form [formGroup]="formCirugia" (ngSubmit)="OnSubmit()">
+          <div class="row">
+              <div class="col-md-12 px-12">
+                <div class="form-group">
+
+                  <label >id</label>
+
+                  <input type="text" class="form-control" formControlName="id" disabled="disabled" placeholder="id" value="id">
+ 
+  <label >fecha</label>
+   <input type="date" class="form-control" placeholder="fecha" formControlName="fecha" required pattern="\d{4}-\d{2}-\d{2}"  value="dateControl" asp-format="{yyyy-MM-dd}" >
+
+<!-- <label > Servicio</label>
+   <select [compareWith]="seleccionServicios" class="form-control" class="custom-select mb-3"  formControlName="servicio" >
+    <option *ngFor="let servicio of servicios" [ngValue]="servicio">
+    {{servicio.nombre}}</option>
+   </select>-->
    
-   
+   <mat-form-field>
+    <label> Procedimientos</label>
     
-    <div class="card-body">
+      <input  style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"  type="text" placeholder="procedimiento" value="procedimiento" matInput formControlName="procedimiento" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let pr of filterProcedimiento | async" [value]="pr">
+        {{pr?.nombre}}
+        </mat-option>
+    </mat-autocomplete>
+   </mat-form-field>
+ 
+  <div>
+   <label> Estado</label>
+   <select [compareWith]="seleccionEstados" class="form-control" class="custom-select mb-3" formControlName="estado">
+     <option *ngFor="let estado of estados" [ngValue]="estado">
+       {{estado?.nombre}}</option>
+   </select>
+  </div></div> </div>
+</div>
+  <div class="row">
+    <div class="update ml-auto mr-auto">
+      <button type="submit" class="btn btn-primary btn-round" >Guardar y Modificar</button>
+      <button (click)="resetCx()"  class="btn btn-primary btn-round" > Nuevo</button>
+    </div>
+    </div>
+    </form>
 
-        <form [formGroup]="formCirugia" (ngSubmit)="OnSubmit()">
-            <div class="row">
-                <div class="col-md-12 px-12">
-                  <div class="form-group">
-
-                    <label >id</label>
-
-                    <input type="text" class="form-control" formControlName="id" disabled="disabled" placeholder="id" value="id">
-   
-    <label >fecha</label>
-     <input type="date" class="form-control" placeholder="fecha" formControlName="fecha" required pattern="\d{4}-\d{2}-\d{2}"  value="dateControl" asp-format="{yyyy-MM-dd}" >
-
-    <label > Servicio</label>
-     <select [compareWith]="seleccionServicios" class="form-control" class="custom-select mb-3"  formControlName="servicio" >
-      <option *ngFor="let servicio of servicios" [ngValue]="servicio">
-      {{servicio.nombre}}</option>
-     </select>
-
-     
-     <label> Estado</label>
-     <select [compareWith]="seleccionEstados" class="form-control" class="custom-select mb-3" formControlName="estado">
-       <option *ngFor="let estado of estados" [ngValue]="estado">
-         {{estado.nombre}}</option>
-       
-     </select>
-    </div></div></div>
-    <div class="row">
-      <div class="update ml-auto mr-auto">
-        <button type="submit" class="btn btn-primary btn-round" >Guardar y Modificar</button>
-        <button (click)="resetCx()"  class="btn btn-primary btn-round" > Nuevo</button>
-      </div>
-      </div>
-      </form>
-
-   
+ 

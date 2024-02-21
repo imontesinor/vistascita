@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Servicios } from 'app/model/servicios';
 import { ServiciosService } from 'app/services/servicios.service';
+import { catchError, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -34,9 +35,8 @@ export class FormularioServiciosComponent {
         this.servicioservice.guardarServicios(servicios.value).subscribe(dato => {
             console.log(this.servicios)
             Swal.fire('Nuevo servicio',
-                `servicio ${servicios.value.nombre} creado con exito`,
-                'success'
-            );
+                `servicio ${servicios.value.nombre} creado con exito`,  'success');
+           
             this.formservicios.reset();
             this.servicios.nombre = null;
             this.irServicio();
@@ -64,4 +64,3 @@ export class FormularioServiciosComponent {
     }
 
 }
-

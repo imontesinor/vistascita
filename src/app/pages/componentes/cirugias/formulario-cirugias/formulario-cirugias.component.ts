@@ -4,8 +4,11 @@ import { ActivatedRoute, Route, Router } from "@angular/router";
 import { Cirugias } from "app/model/cirugias";
 import { Citas } from "app/model/citas";
 import { Estados } from "app/model/estados";
+import { Procedimientos } from "app/model/procedimientos";
 import { Servicios } from "app/model/servicios";
 import { ServiciosService } from "app/services/servicios.service";
+import { isDuration } from "moment";
+import { Observable, debounceTime, distinctUntilChanged, startWith, switchMap } from "rxjs";
 import Swal from "sweetalert2";
 
 @Component({
@@ -14,38 +17,54 @@ import Swal from "sweetalert2";
 })
 
 export class FormularioCirugiaComponent{
-    formCirugia:FormGroup;
+    formCirugia:FormGroup=this.fb.group({
+        id:'',
+        fecha:['', [Validators
+            .required,
+            // validates date format yyyy-mm-dd with regular expression
+            Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)
+        ]],
+        estado:'',
+       // servicio:'',
+        procedimiento:''
+    });
     cirugia:Cirugias= new Cirugias();
     @Input() cirugiare: Cirugias;   
     @Output() propagar= new EventEmitter<Object>();
     estados:Estados[];
-    servicios:Servicios[];
+    //servicios:Servicios[];
     tamano:number=8;
     total:number=0;
     p:number=1;
     idPacienteUrl:any;
-    
+    procedimiento:Procedimientos;
+    filterValue:any;
+    filterProcedimiento:any;    
+    cirugiass:Cirugias[];
 
 
     constructor(public serviceservicio:ServiciosService,public router:Router,public route:ActivatedRoute,public fb:FormBuilder){
-        this.idPacienteUrl=this.route.snapshot.paramMap.get('id')
-        this.formCirugia=this.fb.group({
-            id:'',
-            fecha:['', [Validators
-                .required,
-                // validates date format yyyy-mm-dd with regular expression
-                Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)
-            ]],
-            estado:'',
-            servicio:''
-        })
+        this.idPacienteUrl=this.route.snapshot.paramMap.get('id');
+        this.filterProcedimiento= this.formCirugia.get('procedimiento').valueChanges.pipe(
+            startWith(''),
+            debounceTime(400),
+            distinctUntilChanged(),
+            switchMap((val:any) =>{
+             let filtro =   this._filtroProc(val);
+             return filtro;
+            })
+        )
+        
 
     }
 
     ngOnInit(){
        this.listarEstados();
-        this.listServiciosp();
+      //  this.listServiciosp();
     }
+
+ 
+
 
     resetCx(){
         return this.cirugia=null;
@@ -79,8 +98,9 @@ export class FormularioCirugiaComponent{
         
 
     }
+
    
-    listServiciosp(){
+ /*   listServiciosp(){
         this.serviceservicio.listserviciosp().subscribe(dato=>
           {
             console.log('servi123',this.servicios=dato)
@@ -88,11 +108,23 @@ export class FormularioCirugiaComponent{
       }   
     seleccionServicios(s1:Servicios,s2:Servicios){
         return  s1==undefined || s2== undefined ?false: s1.eid === s2.eid ;
+       }*/
+
+    
+       _filtroProc(val:any){
+        this.filterValue= val?.nombre == undefined ? val : val?.nombre
+        return this.serviceservicio.filtrarProcedimientos(this.filterValue);
+
        }
-   
+
+              
+       displayFn(s): any {
+        return s?.nombre;
+      }
+    
     
     seleccionEstados(e1:Estados,e2:Estados){
-        return  e1== undefined || e2== undefined  ?false: e1.id===e2.id
+        return  e1== undefined || e2== undefined  ? false: e1.id===e2.id
      
         }
      
@@ -105,6 +137,10 @@ export class FormularioCirugiaComponent{
             })
         })
     }
+
+
+
+
 
 
 

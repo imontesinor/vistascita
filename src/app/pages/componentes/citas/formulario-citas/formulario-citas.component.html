@@ -59,7 +59,8 @@
               pattern="\d{4}-\d{2}-\d{2}" value="dateControl" asp-format="{yyyy-MM-dd}">
              
               <mat-form-field style="border: 1px;">
-                <input  placeholder="Selecciona una opción" type="text" matInput  formControlName="servicio" [matAutocomplete]="auto"  >
+                <label>Servicio</label>
+                <input  style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"  placeholder="Selecciona una opción" type="text" matInput  formControlName="servicio" [matAutocomplete]="auto"  >
                 <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn" >  
                   <mat-option *ngFor="let servi of filtroServicios | async " [value]="servi">
                    {{ servi.nombre }}

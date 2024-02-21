@@ -1,34 +1,34 @@
 <div class="card-header">
-    <h2 class="card-title">Guardar Procedimientos
-    </h2>
-  </div>
-  <div class="card-body">
-    <form [formGroup]="formProc"    (ngSubmit)="onSubmit()">
-      <div class="row">
-        <div class="col-md-12 px-12">
-          <div class="form-group">
-            <label >id</label>
-            <input type="text" placeholder="id" disabled="disabled" class="form-control" formControlName="id" value="id">
+  <h2 class="card-title">Procedimientos</h2>
+</div>
+<div class="card-body">
+  <form [formGroup]="formProc" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-12 px-12">
+        <div class="form-group">
+          <label>id</label>
+          <input type="text" placeholder="id" disabled="disabled" class="form-control" formControlName="id" value="id">
 
-    <label >cups</label>
-    <input type="text" placeholder="cups"  class="form-control" formControlName="cups" value="cups">
+          <label>cups</label>
+          <input type="text" placeholder="cups" class="form-control" formControlName="cups" value="cups">
 
-        <label >nombre</label>
-        <input type="text" placeholder="nombre"  class="form-control" formControlName="nombre" value="nombre">
+          <label>nombre</label>
+          <input type="text" placeholder="nombre" class="form-control" formControlName="nombre" value="nombre">
+        </div>
+      </div>
     </div>
+    <div class="row">
+      <div class="update ml-auto mr-auto">
 
+        <button type="submit" class="btn btn-primary btn-round">Guardar y Editar</button>
+
+      </div>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="update ml-auto mr-auto">
+      <form><button (click)="nuevoP()" class="btn btn-primary btn-round">Nuevo</button></form>
+    </div>
+  </div>
 </div>
-</div>
-<div class="row">
-<div class="update ml-auto mr-auto">
-  <button type="submit" class="btn btn-primary btn-round">Guardar</button>
-</div>
-
-
-</div>
-</form></div>
-<div class="row">
-  <div class="update ml-auto mr-auto">
-<button  (click)="nuevoP()"  class="btn btn-primary btn-round">Nuevo</button>
-
-

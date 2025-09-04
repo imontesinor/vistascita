@@ -20,9 +20,10 @@ export const ROUTES: RouteInfo[] = [
     { path: '/servicios',     title: 'Servicios',         icon:'nc-globe',  class: '' },
     { path: '/estados',       title: 'Estados',           icon:'nc-diamond',    class: '' },
     { path: '/login',         title: 'Usuarios',          icon:'nc-single-02',  class: '' },
-  //  { path: '/citas',         title: 'PacientexCitas',             icon:'nc-paper',      class: '' },
-    //{ path: '/citasdeta',         title: 'Citas Detalle',             icon:'nc-paper',      class: '' },
-    //{ path: '/cirugia',         title: 'Cirugias',             icon:'nc-tile-56',      class: '' },
+   //{ path: '/citas',         title: 'PacientexCitas',             icon:'nc-paper',      class: '' },
+    { path: '/citasdeta',         title: 'Citas Detalle',             icon:'nc-paper',      class: '' },
+    // { path: '/cirugiadeta',         title: 'Cirugias Detalle',             icon:'nc-tile-56',      class: '' },
+    // { path: '/cirugia',         title: 'Cirugias',             icon:'nc-tile-56',      class: '' },
     { path: '/procedimientos',         title: 'Procedimientos',             icon:'nc-spaceship',      class: '' },
     { path: '/empresas',         title: 'Empresas',             icon:'nc-spaceship',      class: '' },
    

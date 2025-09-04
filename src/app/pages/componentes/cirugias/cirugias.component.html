@@ -22,17 +22,17 @@
 
  
       <td> {{paciente?.paciente?.id}}</td>
+       <td> {{idPaciente}}</td>
     <td> {{paciente?.paciente?.cedula}}</td>
       <td> {{paciente?.paciente?.nombre}} {{paciente?.paciente?.apellidos}}</td>
 
 </tbody>
 
-
-<h4 class="card-title">Cirugias </h4>
+ <h4 class="card-title">Cirugias </h4>
 <thead class=" text-primary">
 
-
-<input type="text" [(ngModel)]="query" placeholder="Search.....">
+ 
+<!-- <input type="text" [(ngModel)]="query" placeholder="Search.....">  -->
 <th> Id</th>
 <th> Estado</th>
 <th> fecha</th>
@@ -50,15 +50,17 @@
       
     
       <button (click)="seleccionCirugia(ci)" class="btn btn-primary btn-round">Seleccionar</button>
-  </tr>
-</tbody>
+   </tr>
+</tbody> 
 </table> 
 <pagination-controls previousLabel="Anterior"  nextLabel="Siguiente" (pageChange)="p=$event; listarCirugia();"></pagination-controls>
 </div></div>
 </div> 
-</div>
+</div> 
 
-<div class="col-md-14">
+ <div class="col-md-14">
 <div>
+<!-- <app-formulario-cirugias ></app-formulario-cirugias> -->
 <app-formulario-cirugias (propagar)="listarCirugia()" [cirugiare]="cirugia"></app-formulario-cirugias>
-</div></div>
+</div></div>    
+

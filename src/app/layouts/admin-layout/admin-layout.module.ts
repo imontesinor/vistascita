@@ -23,7 +23,7 @@ import { ProcedimientosComponent } from 'app/pages/componentes/procedimientos/pr
 import { FormularioServiciosComponent } from 'app/pages/componentes/servicios/formulario-servicios/formulario-servicios.component';
 import { FormularioPacientesComponent } from  'app/pages/componentes/pacientes/formulario-pacientes/formulario-pacientes.component';
 import { FormularioCitasComponent}      from 'app/pages/componentes/citas/formulario-citas/formulario-citas.component';
-import { FormularioCirugiaComponent } from 'app/pages/componentes/cirugias/formulario-cirugias/formulario-cirugias.component';
+import { FormularioCirugiasComponent } from 'app/pages/componentes/cirugias/formulario-cirugias/formulario-cirugias.component';
 import { FormularioProcedimientosComponent } from 'app/pages/componentes/procedimientos/formulario-procedimientos/formulario-procedimientos.component';
 import { FormularioCitasDetaComponent}      from 'app/pages/componentes/citasdeta/formulario-citasdeta/formulario-citasdeta.component';
 import { FormularioEstadosComponent } from 'app/pages/componentes/estados/formulario-estados/formulario-estados.component';
@@ -74,7 +74,7 @@ import { FormularioEmpresasComponent } from 'app/pages/componentes/empresas/form
     FormularioProcedimientosComponent,
     FormularioPacientesComponent,
     FormularioCitasComponent,
-    FormularioCirugiaComponent,
+    FormularioCirugiasComponent,
     FormularioCitasDetaComponent,
    FormularioEstadosComponent,
    FormularioEmpresasComponent,

@@ -22,10 +22,10 @@
               <tr *ngFor="let s of servicios | paginate: { itemsPerPage: tamano, currentPage: p, totalItems:total }">
 
                 <td  *ngIf="serviciosservice.hasRole('ROLE_ADMIN')">
-                  {{s.eid}}
+                  {{s?.eid}}
                 </td>
                 <td>
-                  {{s.nombre}}
+                  {{s?.nombre}}
                   <button *ngIf="serviciosservice.hasRole('ROLE_ADMIN')" (click)="buscarServicio(s)" class="btn btn-primary btn-round">detalle</button>
                 </td>
               </tr>

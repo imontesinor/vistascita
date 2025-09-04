@@ -42,7 +42,7 @@
             <input style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"   class="form-control"  placeholder="Selecciona una opción" type="text" formControlName="empresa"  matInput  [matAutocomplete]="auto"  >
             <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn" >  
               <mat-option *ngFor="let emp of filterEmpresa | async " [value]="emp">
-               {{ emp.nombre }}
+               {{ emp?.nombre }}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>

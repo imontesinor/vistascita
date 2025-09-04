@@ -63,7 +63,7 @@ export class PacientesComponent{
       this.serviciosservice
         .listarPacientes(this.p,this.tamano)
         .subscribe((dato:any)=>{
-          console.log(dato);
+          console.log('listapaciente',dato);
           setTimeout(()=>{
             this.pacientes= dato.content
             this.total=dato.totalElements

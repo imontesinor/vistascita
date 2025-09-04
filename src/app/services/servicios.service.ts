@@ -20,7 +20,7 @@ import { Empresas } from 'app/model/empresas';
 export class ServiciosService {
   private _usuario: Usuarios;
   private _token: string;
-  URL_BACKEND = 'http://ec2-18-118-23-196.us-east-2.compute.amazonaws.com:8080/';
+  URL_BACKEND = 'http://localhost:8080/';
   private httpHeaders = new HttpHeaders;
   servicios: Servicios[];
   pacientes: Pacientes[];
@@ -151,7 +151,7 @@ export class ServiciosService {
   }
 
   login(usuario: Usuarios): Observable<any> {
-    const urlEndpoind = 'http://ec2-18-118-23-196.us-east-2.compute.amazonaws.com:8080/oauth/token';
+    const urlEndpoind = 'http://localhost:8080/oauth/token';
     const credenciales = btoa('angularapp' + ':' + '12345');
     const httpHeaders = new HttpHeaders({
       'content-type': 'application/x-www-form-urlencoded',
@@ -168,9 +168,13 @@ export class ServiciosService {
 
   }
   listarServicios(pagina: number, size: number) {
-    return this.http.get<Servicios[]>(this.URL_BACKEND + `api/servicios/consultar/${(pagina ? pagina : 1) - 1},${size}`);
+    return this.http.get<Servicios[]>(this.URL_BACKEND + `api/servicios/consultar/${(pagina ? pagina : 1) - 1},${size}`,{ headers: this.agregarAthorizationHeaders() }).pipe(
+      catchError(e => {
+        this.isNoAutorizado(e);
+        return throwError(e);
+      })
+    );
   }
-
   listarPacientes(pagina: number, size: number) {
     return this.http.get<Pacientes[]>(this.URL_BACKEND + `api/pacientes/consultar/${(pagina ? pagina : 1) - 1},${size}`, { headers: this.agregarAthorizationHeaders() }).pipe(
       catchError(e => {
@@ -247,7 +251,15 @@ export class ServiciosService {
       })
     );
   }
-
+  
+ filtrarIdCirugia(id:any){
+  return this.http.get<Cirugias[]>(this.URL_BACKEND +  `api/cirugia/consultaid?id=${id}&pagina=0size=8`,{ headers: this.agregarAthorizationHeaders()}).pipe(
+    catchError(e => {
+      this.isNoAutorizado(e);
+      return throwError(e);
+    })
+  )
+ }
   filtrarNombreServicio(id: any) {
     return this.http.get<Servicios[]>(this.URL_BACKEND + `api/servicios/listarnombre?id=${id}`, { headers: this.agregarAthorizationHeaders() }).pipe(
       catchError(e => {

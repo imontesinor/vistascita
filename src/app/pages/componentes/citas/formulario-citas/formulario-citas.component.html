@@ -35,7 +35,7 @@
               formControlName="estado">
               <!--<option value="estado"> Escoge un Estado</option>-->
               <option *ngFor="let estado of estados" [ngValue]="estado">
-                {{estado.nombre}}
+                {{estado?.nombre}}
               </option>
 
             </select>
@@ -63,7 +63,7 @@
                 <input  style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"  placeholder="Selecciona una opción" type="text" matInput  formControlName="servicio" [matAutocomplete]="auto"  >
                 <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn" >  
                   <mat-option *ngFor="let servi of filtroServicios | async " [value]="servi">
-                   {{ servi.nombre }}
+                   {{ servi?.nombre }}
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>

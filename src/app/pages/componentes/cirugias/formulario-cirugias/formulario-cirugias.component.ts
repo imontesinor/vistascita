@@ -16,7 +16,7 @@ import Swal from "sweetalert2";
     templateUrl:'formulario-cirugias.component.html'
 })
 
-export class FormularioCirugiaComponent{
+export class FormularioCirugiasComponent{
     formCirugia:FormGroup=this.fb.group({
         id:'',
         fecha:['', [Validators

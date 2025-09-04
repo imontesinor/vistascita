@@ -31,7 +31,7 @@
             <select [compareWith]="seleccionEstado" class="form-control" class="custom-select mb-3" formControlName="estado">
               <!--<option value="estado"> Escoge un Estado</option>-->
               <option *ngFor="let estado of estados" [ngValue]="estado">
-                {{estado.nombre}}
+                {{estado?.nombre}}
               </option>
   
             </select>
